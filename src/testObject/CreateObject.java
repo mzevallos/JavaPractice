@@ -6,6 +6,17 @@ public class CreateObject
 	public final int EMAIL_SIZE = 5;
 	
 	//Instance Variables
+	
+	/**
+	 * TODO:
+	 * Strings are immutable and costly on performance. 
+	 * Consider using StringBuffer or StringBuilder where applicable
+	 * 
+	 * Add in Date and Calendar functionality, Objects can be created every day of the week
+	 * except Saturdays and Sundays. 
+	 * Objects will not longer be able to be instantiated 1 year from
+	 * the time the Date and Calendar functionality get added to the program
+	 * */
 	private String firstName;
 	private String lastName;
 	private int age;
@@ -23,18 +34,13 @@ public class CreateObject
 	
 	public CreateObject(String fName, String lName, int age)
 	{
-		if(fName == null || fName.contentEquals(""))
-		{
-			throw new IllegalArgumentException("First Name cannot be blank, what are you doing?!");
-		}
-		if(lName == null || lName.equals(""))
-		{
-			throw new IllegalArgumentException("What did I just say? Are you listening?");
-		}
+		validateName(fName);
+		validateName(lName);
 		if(age <= 18)
 		{
 			throw new IllegalArgumentException("You are too young for this service, kid!");
 		}
+		
 		this.firstName = fName;
 		this.lastName = lName;
 		this.age = age;
@@ -67,18 +73,12 @@ public class CreateObject
 	//Mutators
 	public void setFirst(String name)
 	{
-		if(name == null || name.contentEquals(""))
-		{
-			throw new IllegalArgumentException("How many times do we have to teach you this lesson, Old Man?");
-		}
+		validateName(name);
 		this.firstName = name;
 	}
 	public void setLast(String name)
 	{
-		if(name == null || name.contentEquals(""))
-		{
-			throw new IllegalArgumentException("We found the patient, Sir. He appears to have forgotten his last name.");
-		}
+		validateName(name);
 		this.lastName = name;
 	}
 	public void setAge(int age)
@@ -135,6 +135,21 @@ public class CreateObject
 	}
 	
 	//Special Purpose
+	public void validateName(String name)
+	{
+		if(name == null || name.equals(""))
+		{
+			throw new IllegalArgumentException("Name is incorrect, Please try again.");
+		}
+		for(int i = 0; i < name.length(); i++)
+		{
+			if(!(Character.isLetter(name.charAt(i))))
+			{
+				throw new IllegalArgumentException("Name can only contain letters. Try again.");
+			}
+		}
+	}
+	
 	public String toString()
 	{
 		String output = "************************************";
