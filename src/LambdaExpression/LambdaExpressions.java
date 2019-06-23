@@ -41,26 +41,24 @@ public class LambdaExpressions
 		 *  (e.g. cannot return String or Object when return type of Sprint() is int)	
 		 * */
 		InterfaceTest1 inf = (int x, double y, String z) -> {return x*2;};
-		System.out.println(inf.sprint(15, 2, "Am I doing this right?"));
+		System.out.println(inf.sprint(15, 2, "Am I doing this right?"));	//output: 30
 		
 		//Testing 2nd interface using Lambda
-		//Variable that determines the answer to the output below
-		int age = 6;
+		int age = 4; //Variable that determines the answer to the output below
 		
-		//Uses Lambda to check if age requirement is met and will pass argument to flightOrNo method
-		boolean s = flightOrNo(()-> {if(age > 5) return true; return false;});
-		//Previous line will determine if true/false whether bird can fly or not
-		if(s)
-			System.out.println("This bird can fly");
-		else
-			System.out.println("This bird cannot fly");	
+		/*
+		 * Uses Lambda to check if age requirement is met and will pass argument to flightOrNo method
+		 */
+		String s = flightOrNo(()-> {if(age >= 5) return true; return false;}, age);
+
+		System.out.println(s); //output: This bird cannot fly. Required Age: 5 Current Age: 4
 	}
 	
-	public static boolean flightOrNo(InterfaceTest2 inf)
+	public static String flightOrNo(InterfaceTest2 inf, int age)
 	{
 		if(inf.canFly())
-			return true;
-		return false;
+			return "This bird can fly.\nRequired Age: 5 \nCurrent Age: " + age;
+		return "This bird cannot fly.\nRequired Age: 5 \nCurrent Age: " + age;
 	}
 }
 
