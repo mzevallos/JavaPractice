@@ -39,25 +39,32 @@ public class EnumExample
 		switch(d)
 		{
 			case Sunday:
-				System.out.println("You have chosen Sunday");
+				System.out.println("You have chosen Sunday\n"
+						+ "Choice: "+d.dayNum);
 				break;
 			case Monday:
-				System.out.println("You have chosen Monday");
+				System.out.println("You have chosen Monday\n"
+						+ "Choice "+d.dayNum);
 				break;
 			case Tuesday:
-				System.out.println("You have chosen Tuesday");
+				System.out.println("You have chosen Tuesday\n"
+						+ "Choice "+d.dayNum);
 				break;
 			case Wednesday:
-				System.out.println("You have chosen Wednesday");
+				System.out.println("You have chosen Wednesday\n"
+				+ "Choice "+d.dayNum);
 				break;
 			case Thursday:
-				System.out.println("You have chosen Thursday");
+				System.out.println("You have chosen Thursday\n"
+				+ "Choice "+d.dayNum);
 				break;
 			case Friday:
-				System.out.println("You have chosen Friday");
+				System.out.println("You have chosen Friday\n"
+				+ "Choice "+d.dayNum);
 				break;
 			case Saturday:
-				System.out.println("You have chosen Saturday");
+				System.out.println("You have chosen Saturday\n"
+				+ "Choice "+d.dayNum);
 				break;
 		}
 	}
