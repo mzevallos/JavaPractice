@@ -10,7 +10,7 @@ public class Object
 	{
 //		Scanner input = new Scanner(System.in);
 //		input.close();
-		final int MAX_SIZE = 2;
+		final int MAX_SIZE = 5;
 		CreateObject[] objectArray = new CreateObject[MAX_SIZE];
 		/**
 		 * TODO:
@@ -28,6 +28,9 @@ public class Object
 		 * LinkedLists are fun, maybe replace arrays
 		 * */
 		int choice = -1;
+		boolean exit = false;
+		do
+		{
 			do
 			{
 				try
@@ -36,54 +39,83 @@ public class Object
 							+ "2: Change Info\n"
 							+ "3: Print People\n"
 							+ "4: Exit Program"));
+					switch(choice)
+					{
+					case 1:
+						populateObject(objectArray, MAX_SIZE);
+						break;
+					case 2:
+						break;
+					case 3:
+						printObjects(objectArray, MAX_SIZE);
+						break;
+					case 4:
+						JOptionPane.showMessageDialog(null, "Until next time, friend.");
+						exit = true;
+						break;
+					default:
+						System.out.println("what up what up!");
+						break;
+					}
 				}
 				catch(NumberFormatException e)
 				{
 					JOptionPane.showMessageDialog(null, "Please enter the corresponding number");
 				}
 			}while(choice <1 || choice >4);
-		
-		switch(choice)
-		{
-		case 1:
-			populateObject(objectArray, MAX_SIZE);
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			JOptionPane.showMessageDialog(null, "Until next time, friend.");
-			break;
-		default:
-			System.out.println("what up what up!");
-			break;
-		}
+		}while(!exit);
 	}
 	
 	public static void populateObject(CreateObject[] objectArray, int size)
 	{
-		do
+		if(!checkSize(size))
 		{
-			try
+			do
 			{
-				objectArray[CreateObject.getObjectCount()] = new CreateObject(JOptionPane.showInputDialog("Enter first name"),
-												  JOptionPane.showInputDialog("Enter last name"),
-												  Integer.parseInt(JOptionPane.showInputDialog("Enter age")));
-			}
-			catch(NumberFormatException e)
-			{
-				JOptionPane.showMessageDialog(null, "Must enter a number for age parameter");
-			}
-			catch(IllegalArgumentException e)
-			{
-				JOptionPane.showMessageDialog(null, e.getMessage());
-			}
-		}while(JOptionPane.showConfirmDialog(null, "Continue entering in data?","Continue?",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION &&
-				CreateObject.getObjectCount()< size);
+				try
+				{
+					objectArray[CreateObject.getObjectCount()] = new CreateObject(JOptionPane.showInputDialog("Enter first name"),
+													  JOptionPane.showInputDialog("Enter last name"),
+													  Integer.parseInt(JOptionPane.showInputDialog("Enter age")));
+				}
+				catch(NumberFormatException e)
+				{
+					JOptionPane.showMessageDialog(null, "Must enter a number for age parameter");
+				}
+				catch(IllegalArgumentException e)
+				{
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+			}while(JOptionPane.showConfirmDialog(null, "Continue entering in data?","Continue?",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION &&
+					CreateObject.getObjectCount()< size);
+			checkSize(size);
+		}
+	}
+	
+	public static boolean checkSize(int size)
+	{
 		if(CreateObject.getObjectCount() == size)
 		{
 			JOptionPane.showMessageDialog(null, "Limit of array has been reached. \nNo more objects can be created.");
+			return true;
 		}
+		return false;
+	}
+	public static void printObjects(CreateObject[] o, int size)
+	{
+		String output = "";
+		if(CreateObject.getObjectCount() == 0)
+		{
+			output = "************************************\n\nNo information has been entered yet.\n\n************************************";
+		}
+		else
+		{
+			output = "************************************\n\n";
+			for(int i = 0; i < CreateObject.getObjectCount(); i++)
+			{
+				output += o[i].toString();
+			}
+		}
+		JOptionPane.showMessageDialog(null, output);
 	}
 }

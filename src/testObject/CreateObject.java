@@ -55,7 +55,7 @@ public class CreateObject
 	public int getAge() {return this.age;}
 	public int getCount() {return this.counter;}
 	public static int getObjectCount() {return objCount;}
-	public String getEmail(int i)
+	private String getEmail(int i)
 	{
 		return this.email[i];
 	}
@@ -152,32 +152,27 @@ public class CreateObject
 	
 	public String toString()
 	{
-		String output = "************************************";
-		if(objCount == 0)
+		String output = "";
+		output += "First Name: " + this.getFirst() + "\nLast Name: " + this.getLast() +
+					"\nAge: " + this.getAge();
+		
+		if(this.counter < 1)
 		{
-			output+= "\n\nNo information has been entered yet.\n\n************************************";
+			output += "\nNo emails on file.\n";
 		}
 		else
 		{
-			output += "\n\nFirst Name: " + this.getFirst() + "\nLast Name: " + this.getLast() +
-					"\nAge: " + this.getAge();
-			if(this.counter < 1)
+			String[] temp = new String[this.counter];
+			temp = this.getEmailArray();
+			output += "List of emails: \n";
+			
+			for(int i = 0; i < this.counter; i++)
 			{
-				output += "\nNo emails on file.\n";
+				output += temp[i] + "\n";
 			}
-			else
-			{
-				String[] temp = new String[this.counter];
-				temp = this.getEmailArray();
-				output += "List of emails: \n";
-				
-				for(int i = 0; i < this.counter; i++)
-				{
-					output += temp[i] + "\n";
-				}
-			}
-			output += "\n************************************";
 		}
+		output += "\n************************************\n\n";
+		
 		
 		return output;
 	}
