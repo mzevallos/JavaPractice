@@ -2,9 +2,13 @@ package collections;
 
 public class Dog 
 {
-	String name;
-	int age;
-	double topSpeed;
+	//Instance Variables
+	private String name;
+	private int age;
+	private double topSpeed;
+	
+	//Static Variable
+	private static int id;
 	
 	public Dog(String name, int age, double topSpeed) 
 	{
@@ -12,8 +16,11 @@ public class Dog
 		this.name = name;
 		this.age = age;
 		this.topSpeed = topSpeed;
+		id++;
 	}
 
+	public static int getId() {return id;}
+	
 	public String getName() {return name;}
 
 	public int getAge() {return age;}
