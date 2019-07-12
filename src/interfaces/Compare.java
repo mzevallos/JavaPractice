@@ -19,9 +19,9 @@ public class Compare implements Comparable {
 	{
 		/**
 		 * compare Method:
-		 * instance2.compareTo(instance1) = 1 if instance2 is larger
-		 * instance2.compareTo(instance1) = 0 if they are the same
-		 * instance2.compareTo(instance1) = -1 if instance1 is larger
+		 * instance2.compare(instance1) = 1 if instance2 is larger
+		 * instance2.compare(instance1) = 0 if they are the same
+		 * instance2.compare(instance1) = -1 if instance1 is larger
 		 * */
 		if(this.getId() == ((Compare)o).getId())
 			return 0;
