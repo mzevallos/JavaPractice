@@ -1,5 +1,9 @@
 package practice1;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class CreateObject 
 {
 	//Constants
@@ -22,6 +26,7 @@ public class CreateObject
 	private int age;
 	private String[] email;
 	private int counter;
+	private Date dateCreated;
 	
 	//Static Variables
 	private static int objCount;
@@ -36,10 +41,13 @@ public class CreateObject
 	{
 		validateName(fName);
 		validateName(lName);
-		if(age <= 18)
+		if(age < 18)
 		{
 			throw new IllegalArgumentException("You are too young for this service, kid!");
 		}
+		
+		this.dateCreated = new Date ();
+		checkDate();
 		
 		this.firstName = fName;
 		this.lastName = lName;
@@ -50,6 +58,7 @@ public class CreateObject
 	}
 	
 	//Accessors
+	public Date getDateCreated() {return this.dateCreated;}
 	public String getFirst() {return this.firstName;}
 	public String getLast() {return this.lastName;}
 	public int getAge() {return this.age;}
@@ -95,6 +104,10 @@ public class CreateObject
 		 * EMAIL VALIDATION: can be enhanced and simplified through regex
 		 * Dummy exceptions thrown, can be more detailed
 		 * */
+		if(this.getCount() >= EMAIL_SIZE)
+		{
+			throw new IllegalArgumentException("Max number of emails reached.");
+		}
 		if(email == null || email.trim().equals(""))
 		{
 			throw new IllegalArgumentException("Email cannot be blank, please fix all your mistakes and think about what you've done.");
@@ -126,7 +139,7 @@ public class CreateObject
 		{
 			throw new IllegalArgumentException("@ and . cannot be next to each other. Write Domain Identifier");
 		}
-		if(!(email.substring(email.length() - 3, email.length()).equalsIgnoreCase(".com")))
+		if(!(email.substring(email.length() - 4, email.length()).equalsIgnoreCase(".com")))
 		{
 			throw new IllegalArgumentException(".com must be at the end");
 		}
@@ -150,11 +163,36 @@ public class CreateObject
 		}
 	}
 	
+	public static String formatDate(Date d)
+	{
+		SimpleDateFormat f = new SimpleDateFormat("MM/dd/YYYY hh:mm:ss");
+
+		return f.format(d);
+		
+	}
+	public void checkDate()
+	{
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.YEAR, 2025);
+		c.set(Calendar.MONTH, 0);
+		c.set(Calendar.DAY_OF_MONTH, 1);
+		c.set(Calendar.HOUR, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		
+		Date d = c.getTime();
+		if(d.getTime() < this.getDateCreated().getTime())
+		{
+			System.out.println(d.getTime());
+			throw new IllegalArgumentException("The time for adding objects has now passed.\n" +
+												"Cannot create objects beyond the date: " + this.formatDate(d));
+		}
+	}
 	public String toString()
 	{
 		String output = "";
 		output += "First Name: " + this.getFirst() + "\nLast Name: " + this.getLast() +
-					"\nAge: " + this.getAge();
+					"\nAge: " + this.getAge() + "\nDate Created: " + this.formatDate(this.getDateCreated());
 		
 		if(this.counter < 1)
 		{
@@ -164,7 +202,7 @@ public class CreateObject
 		{
 			String[] temp = new String[this.counter];
 			temp = this.getEmailArray();
-			output += "List of emails: \n";
+			output += "\nList of emails: \n";
 			
 			for(int i = 0; i < this.counter; i++)
 			{

@@ -1,8 +1,6 @@
 package practice1;
-import javax.*;
-import javax.swing.JOptionPane;
 
-import java.util.*;
+import javax.swing.JOptionPane;
 
 public class Object 
 {
@@ -10,7 +8,7 @@ public class Object
 	{
 //		Scanner input = new Scanner(System.in);
 //		input.close();
-		final int MAX_SIZE = 5;
+		final int MAX_SIZE = 2;
 		CreateObject[] objectArray = new CreateObject[MAX_SIZE];
 		/**
 		 * TODO:
@@ -77,6 +75,21 @@ public class Object
 					objectArray[CreateObject.getObjectCount()] = new CreateObject(JOptionPane.showInputDialog("Enter first name"),
 													  JOptionPane.showInputDialog("Enter last name"),
 													  Integer.parseInt(JOptionPane.showInputDialog("Enter age")));
+					
+					CreateObject temp = objectArray[CreateObject.getObjectCount()-1];
+					
+					while(JOptionPane.showConfirmDialog(null, "Enter emails?\nCurrent Count: " + temp.getCount() +"\nMax allowed: " + temp.EMAIL_SIZE,"Emails?",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION &&
+							temp.getCount() < temp.EMAIL_SIZE)
+					{
+						try
+						{
+							temp.setEmail(JOptionPane.showInputDialog("Enter in an email"));
+						}
+						catch(IllegalArgumentException e)
+						{
+							JOptionPane.showMessageDialog(null, e.getMessage());
+						}
+					}
 				}
 				catch(NumberFormatException e)
 				{
@@ -86,7 +99,7 @@ public class Object
 				{
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
-			}while(JOptionPane.showConfirmDialog(null, "Continue entering in data?","Continue?",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION &&
+			}while(JOptionPane.showConfirmDialog(null, "Continue entering in data?\nCurrent Count: " + CreateObject.getObjectCount() +"\nMax allowed: " + size,"Continue?",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION &&
 					CreateObject.getObjectCount()< size);
 			checkSize(size);
 		}
