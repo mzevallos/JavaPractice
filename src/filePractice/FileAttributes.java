@@ -11,7 +11,7 @@ public class FileAttributes
 {
 	public static void main(String[]args)
 	{
-		File f = new File("C:\\Users\\Romina V Zevallos\\Documents");
+		File f = new File("C:\\Users\\MZevallos\\Documents");
 		
 		File[] allFiles = f.listFiles();
 		
