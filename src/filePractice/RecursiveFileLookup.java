@@ -9,7 +9,7 @@ public class RecursiveFileLookup
 	public static void main(String[] args) 
 	{
 		
-		File f = new File("C:\\Users\\Romina V Zevallos\\eclipse");
+		File f = new File("C:\\Users\\MZevallos\\eclipse");
 		
 		recurseDirectory(f);
 	}
