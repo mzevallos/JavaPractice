@@ -2,20 +2,34 @@ package filePractice;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-public class RecursiveFileLookup 
+public class RecursiveFileLookup
 {
 
 	public static void main(String[] args) 
 	{
 		
 		File f = new File("C:\\Users\\MZevallos\\eclipse");
+		LinkedHashMap<String, String> m = new LinkedHashMap<String, String>();
 		
-		recurseDirectory(f);
+		recurseDirectory(f, m);
+		
+		Collection<Map.Entry<String, String>> eSet = m.entrySet();
+		
+		Iterator<Map.Entry<String,String>> it = eSet.iterator();
+		
+		while(it.hasNext())
+		{
+			Map.Entry<String,String> set = it.next();
+			System.out.println(set.getKey() + " | " + set.getValue());
+		}
 	}
-	public static void recurseDirectory(File f) 
-	{
-		if(f == null)
+	public static void recurseDirectory(File f, Map<String, String> m) 
+	{		if(f == null)
 		{
 			System.out.println("f was null");
 			return;
@@ -33,135 +47,18 @@ public class RecursiveFileLookup
 			};
 			File[] filesWithFilter = f.listFiles(fnf);
 			File[] filesWithoutFilter = f.listFiles();
-			for(File e: filesWithFilter)
+			for(int i = 0; i < filesWithFilter.length; i++)
 			{
-				System.out.println(e);
+				m.put("Filter: " + (m.size() + 1), filesWithFilter[i].getAbsolutePath());
 			}
 			for(File e2: filesWithoutFilter)
 			{
 				if(e2.isDirectory())
 				{
 					File tempFile = new File(f.getAbsolutePath() + "\\" + e2.getName());
-					recurseDirectory(tempFile);
+					recurseDirectory(tempFile, m);
 				}
 			}
 		}
 	}
 }
-
-/**
- * CODE OUTPUT FROM METHOD ABOVE
- * 	C:\Users\MZevallos\eclipse\something1.bmp
- *	C:\Users\MZevallos\eclipse\docs\api\java.base\java\io\class-use\something3.bmp
- *	C:\Users\MZevallos\eclipse\java-2019-03\eclipse\configuration\org.eclipse.osgi\173\data\-1721673519\content.jar
- *	C:\Users\MZevallos\eclipse\java-2019-03\eclipse\configuration\org.eclipse.osgi\181\data\listener_1925729951\artifacts.jar
- *	C:\Users\MZevallos\eclipse\java-2019-03\eclipse\configuration\org.eclipse.osgi\181\data\listener_1925729951\content.jar
- *	C:\Users\MZevallos\eclipse\java-2019-03\eclipse\configuration\org.eclipse.osgi\213\0\.cp\lib\java10api.jar
- *	C:\Users\MZevallos\eclipse\java-2019-03\eclipse\configuration\org.eclipse.osgi\224\0\.cp\lib\javaagent-shaded.jar
- *	C:\Users\MZevallos\eclipse\java-2019-03\eclipse\configuration\org.eclipse.osgi\224\0\.cp\lib\launchingsupport.jar
- *	C:\Users\MZevallos\eclipse\java-2019-03\eclipse\plugins\org.eclipse.equinox.launcher_1.5.300.v20190213-1655.jar
- *	C:\Users\MZevallos\eclipse\java-oxygen\eclipse\configuration\.settings\something2.bmp
- *	C:\Users\MZevallos\eclipse\java-oxygen\eclipse\configuration\org.eclipse.osgi\181\data\-1721673519\content.jar
- *	C:\Users\MZevallos\eclipse\java-oxygen\eclipse\configuration\org.eclipse.osgi\189\data\listener_1925729951\artifacts.jar
- *	C:\Users\MZevallos\eclipse\java-oxygen\eclipse\configuration\org.eclipse.osgi\189\data\listener_1925729951\content.jar
- *	C:\Users\MZevallos\eclipse\java-oxygen\eclipse\configuration\org.eclipse.osgi\221\0\.cp\lib\java9api.jar
- *	C:\Users\MZevallos\eclipse\java-oxygen\eclipse\configuration\org.eclipse.osgi\232\0\.cp\lib\launchingsupport.jar
- *	C:\Users\MZevallos\eclipse\java-oxygen\eclipse\configuration\org.eclipse.osgi\69\0\.cp\jars\maven-aether-provider-3.1.0.jar
- *	C:\Users\MZevallos\eclipse\java-oxygen\eclipse\configuration\org.eclipse.osgi\69\0\.cp\jars\maven-model-3.1.0.jar
- *	C:\Users\MZevallos\eclipse\java-oxygen\eclipse\configuration\org.eclipse.osgi\69\0\.cp\jars\maven-model-builder-3.1.0.jar
- *	C:\Users\MZevallos\eclipse\java-oxygen\eclipse\configuration\org.eclipse.osgi\69\0\.cp\jars\maven-repository-metadata-3.1.0.jar
- *	C:\Users\MZevallos\eclipse\java-oxygen\eclipse\configuration\org.eclipse.osgi\69\0\.cp\jars\plexus-interpolation-1.16.jar
- *	C:\Users\MZevallos\eclipse\java-oxygen\eclipse\configuration\org.eclipse.osgi\69\0\.cp\jars\plexus-utils-2.1.jar
- *	C:\Users\MZevallos\eclipse\java-oxygen\eclipse\plugins\org.eclipse.equinox.launcher_1.4.0.v20161219-1356.jar
- * */
-
-/**
- * Failed attempts below
- * */
-
-//	public static void recurseDirectory(File f) 
-//	{
-//		if(f == null)
-//		{
-//			System.out.println("f was null");
-//			return;
-//		}
-//		if(f.isDirectory())
-//		{
-//			if(!f.isFile())
-//			{
-//				try
-//				{
-//					File[] files = f.listFiles();
-//					for(File e: files)
-//					{
-//						File tempFile = new File(f.getAbsolutePath() + "\\" + e.getName());
-//						
-//						FilenameFilter fnf = new FilenameFilter() {
-//							
-//							@Override
-//							public boolean accept(File dir, String name) {
-//									if(name.endsWith(".bmp"))
-//										return true;
-//								return false;
-//							}
-//						};
-//						
-//						File[] jarFiles = f.listFiles(fnf);
-//						for(File ed: jarFiles)
-//						{
-//							System.out.println(ed.getAbsolutePath());
-//						}
-//						
-//						recurseDirectory(tempFile);
-//					}
-//				}
-//				catch(NullPointerException e)
-//				{
-//					System.out.println("Something went wrong");
-//				}
-//			}
-//		}
-//	}
-
-	
-	
-	
-//				if(e.isFile())
-//				{
-//					FilenameFilter fnf = new FilenameFilter() {
-//						
-//						@Override
-//						public boolean accept(File dir, String name) {
-//								if(name.endsWith(".bmp"))
-//									return true;
-//							return false;
-//						}
-//					};
-//					File[] bmpFiles = f.listFiles(fnf);
-//					for(File e2: bmpFiles)
-//					{
-//						System.out.println(e2);
-//					}
-//				}
-				//System.out.println(e);
-//				File tempFile = new File(f.getAbsolutePath() + "\\" + e.getName());
-//				
-//				FilenameFilter fnf = new FilenameFilter() {
-//					
-//					@Override
-//					public boolean accept(File dir, String name) {
-//							if(name.endsWith(".bmp"))
-//								return true;
-//						return false;
-//					}
-//				};
-//				
-//				File[] jarFiles = f.listFiles(fnf);
-//				for(File ed: jarFiles)
-//				{
-//					System.out.println(ed.getAbsolutePath());
-//				}
-//				
-//				recurseDirectory(tempFile);
-
