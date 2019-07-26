@@ -7,6 +7,10 @@ import java.util.Set;
 
 import collections.Dog;
 
+/**
+ * Create a program using set interface extending from Collection.
+ * Usage of Set design to remove duplicates in an array and to validate whether or not a value can be added to the array
+ */
 public class SetExample 
 {
 	public static void main(String[]args)
