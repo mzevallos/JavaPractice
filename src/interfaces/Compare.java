@@ -3,7 +3,12 @@ package interfaces;
 import java.util.Arrays;
 
 public class Compare implements Comparable {
-
+	
+	/**
+	 * Testing Comparable interface to define rules for object comparison.
+	 * Objects stored in an array are sorted based on the established rules and compare individual instances
+	 */
+	
 	int id;
 	
 	public Compare()
