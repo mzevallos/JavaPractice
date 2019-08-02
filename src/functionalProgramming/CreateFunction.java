@@ -61,5 +61,13 @@ public class CreateFunction
 		String functionChain = wordCountFunction.andThen(numToTextFunction).apply("Testing function chaining");
 		
 		System.out.println("Chaining both Functions \n"+ functionChain);
+		
+		System.out.println();
+		System.out.println("Lambda Function Word Count:");
+		
+		Function<String, Integer> lambdaFunc = t -> t.split(" ").length;
+		
+		Integer i = lambdaFunc.apply("Testing lambda function of previous function");
+		System.out.println(i);
 	}
 }
