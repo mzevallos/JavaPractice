@@ -7,6 +7,11 @@ public class CreateFunction
 	public static void main(String[]args) {
 		
 		/**
+		 * Functions are used to transform a given data(input) into a new object(output) : Function<Input, Output>
+		 * Suppliers are used to construct objects from nothing (no input but you have an output : return Object)
+		 * Consumers are used to consume objects(one single input argument and no output : void, no return type)
+		 * Predicates are used to test if data conforms to a value or logic(boolean: True or False)
+		 * 
 		 * Function created to count the number of words in a sentence
 		 * The input is the argument you are passing along
 		 * The output will be the return value
