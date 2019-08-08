@@ -79,6 +79,15 @@ public class Streams {
 		Optional<Integer> optional = testList.max((f,s) -> f-s);
 		Integer maxInt = optional.get();
 		System.out.println("Largest Value in Set: "+ maxInt);
+		
+		//open stream again
+		testList = aList.stream();
+		int sum = testList.mapToInt(num -> num).sum();
+		//open stream again
+		testList = aList.stream();
+		double average = testList.mapToInt(num -> num).average().getAsDouble();
+		System.out.println("Sum: " + sum);
+		System.out.println("Average: " + average);
 	}
 
 }
