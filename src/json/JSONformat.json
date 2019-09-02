@@ -1,0 +1,18 @@
+{
+   "keyOnLeft":"valueOnRight",
+   "objectExample":{
+      "primitiveDataType":145,
+      "nonPrimitive":{
+         "attribute1":"asd",
+         "attribute2":123,
+         "array":[
+            "primitive1",
+            {
+               "object":{
+                  "something":"somethingElse"
+               }
+            }
+         ]
+      }
+   }
+}

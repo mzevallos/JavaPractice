@@ -1,0 +1,36 @@
+{
+   "customer":{
+      "name":"Mauricio",
+      "surname":"Zevallos",
+      "contact":"MauricioZev@email.com",
+      "shopping_list":{
+         "items":[
+            "textbook",
+            "laptop"
+         ],
+         "information":[
+            {
+               "object1":{
+                  "type":"textbook",
+                  "cover":"Using JSON",
+                  "price":"Invaluable"
+               }
+            },
+            {
+               "object2":{
+                  "type":"laptop",
+                  "parts":{
+                     "allInOne":{
+                        "motherboard":"z270",
+                        "ram":"2x16GB DDR5 RAM",
+                        "gpu":"2080ti",
+                        "cpu":"i9 9900"
+                     }
+                  },
+                  "price":2300
+               }
+            }
+         ]
+      }
+   }
+}
